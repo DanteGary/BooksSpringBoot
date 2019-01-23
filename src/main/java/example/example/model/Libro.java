@@ -11,7 +11,15 @@ import java.util.Set;
 @Entity
 public class Libro extends Model{
     private String titulo;
-    private Date fecha_edicion;
+    private String fecha_edicion;
+
+    public String getFecha_edicion() {
+        return fecha_edicion;
+    }
+
+    public void setFecha_edicion(String fecha_edicion) {
+        this.fecha_edicion = fecha_edicion;
+    }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "libro", cascade = CascadeType.ALL)
     private Set<Autor_Libro> autor_libros = new HashSet<>();
@@ -32,11 +40,5 @@ public class Libro extends Model{
         this.titulo = titulo;
     }
 
-    public Date getFecha_edicion() {
-        return fecha_edicion;
-    }
 
-    public void setFecha_edicion(Date fecha_edicion) {
-        this.fecha_edicion = fecha_edicion;
-    }
 }

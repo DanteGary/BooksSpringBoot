@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Libros</title>
 </head>
 <body>
-$END$
+<div class="container">
+    <div class="roow">
+        <h1>Lista de Libros</h1>
+        <button class="btn btn-success" id="nuevo">Nuevo Libro</button>
+        <table class="table">
+            <tr>
+                <th>ID</th>
+                <th>Titulo</th>
+                <th>Fecha Edicion</th>
+                <th></th>
+
+            </tr>
+            <tr th:each="libro:${libros}">
+                <td th:text="${libro.id}"></td>
+                <td th:text="${libro.titulo}"></td>
+                <td th:text="${libro.fecha_edicion}"></td>
+                <td>
+                    <a th:href="@{findOne/(id=${libro.id})}" class="btn btn-warning" data-toggle="modal" data-target="#edit-libro">Editar</a>
+                    <a th:href="@{/lib/(${libro.id})}" class="btn btn-danger" data-toggle="modal" data-target="#eliminar-libro">Eliminar</a>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row" id="formulario" >
+                <form th:action="@{/saveLibro}" method="post">
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <h2>Nuevo Libro</h2>
+                            <div class="form-group">
+                                <label for="titulo" class="col-form-label">Titulo:</label>
+                                <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Nombre del libro" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="fecha_edicion" class="col-form-label">Edicion:</label>
+                                <input type="date" class="form-control" name="fecha_edicion" id="fecha_edicion" required/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <h2>Lista de Autores</h2>
+                            <table class="table table-cell">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody th:each="aut:${autores}">
+                                <td th:text="${aut.id}"></td>
+                                <td th:text="${aut.nombre}"></td>
+                                <td >
+                                    <input type="checkbox" th:data-id="${aut.id}">
+                                </td>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="button" class="btn btn-danger" id="cerrar">Cancelar</button>
+                        <input type="submit" class="btn btn-success" value="registrar" />
+                    </div>
+
+                </form>
+        </div>
+    </div>
+</div>
+
+
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+<script th:src="@{coustum.js}"></script>
 </html>

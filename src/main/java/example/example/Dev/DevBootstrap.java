@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 
 
 @Component
@@ -29,9 +30,14 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent>{
     }
 
     private void initData() {
-        Autor appAutor = new Autor();
-        appAutor.setNombre("Jorge Luis");
-
-        autorRepository.save(appAutor);
+//        Autor appAutor = new Autor();
+//        appAutor.setNombre("Autor1");
+//
+//        autorRepository.save(appAutor);
+//
+//        Libro appLibro = new Libro();
+//        appLibro.setTitulo("Libro1");
+//        appLibro.setFecha_edicion(new Date(2019, 1, 1));
+//        libroRepository.save(appLibro);
     }
 }
